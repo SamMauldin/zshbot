@@ -171,6 +171,9 @@ var silent = false;
 function commands(msg, nick, stream) {
 	if (!run) { return; }
 	console.log(nick + "(" + users[nick] + "): " + msg);
+	if (msg == "exit") {
+		stream.write("Type /exit to exit.\r");
+	}
 	var cmd = msg.split(" ");
 	if (cmd[0] == ourNick + ",") {
 		if ((cmd[1] == "identify" || cmd[1] == "whoami") && !silent) {
@@ -183,7 +186,7 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "easter" && !silent) {
 			stream.write("You found an easter egg!\r");
 		} else if (cmd[1] == "help" && !silent) {
-			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, restart, identify, silence, list. Made by Sam. https://github.com/Sxw1212/zshbot\r");
+			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, restart, identify, silence, list, beepme. Made by Sam. https://github.com/Sxw1212/zshbot\r");
 		} else if (cmd[1] == "ls" && !silent) {
 			stream.write("Bus Error\r");
 		} else if (cmd[1] == "sudo" && !silent) {
@@ -192,6 +195,8 @@ function commands(msg, nick, stream) {
 			stream.write("Upgrading oh-my-zsh... Done!\r");
 		} else if (cmd[1] == "ssh" && !silent) {
 			stream.write("Connecting... Joined chat!\r");
+		} else if (cmd[1] == "beepme" && !silent) {
+			stream.write("Beeping " + nick + "...\r");
 		} else if (cmd[1] == "zsh" && !silent) {
 			stream.write("ZSHCEPTION!\r");
 		} else if (cmd[1] == "cat" && !silent) {
