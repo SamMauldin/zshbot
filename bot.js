@@ -25,6 +25,7 @@ var Connection = require("ssh2");
 
 var conn = new Connection();
 
+var run = false;
 var users = {};
 var nickchange = {};
 
@@ -35,6 +36,7 @@ setInterval(function() {
 }, 1000 * 10);
 
 setInterval(function() {
+	run = true;
 	users = {};
 }, 1000 * 5);
 
@@ -167,6 +169,7 @@ conn.connect({
 var silent = false;
 
 function commands(msg, nick, stream) {
+	if (!run) { return; }
 	console.log(nick + "(" + users[nick] + "): " + msg);
 	var cmd = msg.split(" ");
 	if (cmd[0] == ourNick + ",") {
@@ -180,13 +183,7 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "easter" && !silent) {
 			stream.write("You found an easter egg!\r");
 		} else if (cmd[1] == "help" && !silent) {
-			stream.write("+----Bot Guide----+\r");
-			stream.write("| ls, sudo, thank |\r");
-			stream.write("| ssh, zsh, cat   |\r");
-			stream.write("| update, opme    |\r");
-			stream.write("| halt, identify  |\r");
-			stream.write("| silence, list   |\r");
-			stream.write("+---Made By Sam---+\r");
+			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, halt, identify, silence, list. Made by Sam. https://github.com/Sxw1212/zshbot\r");
 		} else if (cmd[1] == "ls" && !silent) {
 			stream.write("Error 404: Nothing found.\r");
 		} else if (cmd[1] == "sudo" && !silent) {
@@ -200,7 +197,7 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "cat" && !silent) {
 			stream.write("Things, Mysterious THINGS.\r");
 		} else if (cmd[1] == "thank" && !silent) {
-			stream.write("Everybody thanks " + cmd[2] + " for his excellent work!\r");
+			stream.write("Everybody thanks " + (cmd[2] || "Shazow") + " for their excellent work!\r");
 		} else if (cmd[1] == "list") {
 			if (!currentWhois) {
 				currentWhois = "list";
