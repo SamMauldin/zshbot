@@ -183,9 +183,9 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "easter" && !silent) {
 			stream.write("You found an easter egg!\r");
 		} else if (cmd[1] == "help" && !silent) {
-			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, halt, identify, silence, list. Made by Sam. https://github.com/Sxw1212/zshbot\r");
+			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, restart, identify, silence, list. Made by Sam. https://github.com/Sxw1212/zshbot\r");
 		} else if (cmd[1] == "ls" && !silent) {
-			stream.write("Error 404: Nothing found.\r");
+			stream.write("Bus Error\r");
 		} else if (cmd[1] == "sudo" && !silent) {
 			stream.write("Password:\r");
 		} else if (cmd[1] == "update" && !silent) {
@@ -197,7 +197,9 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "cat" && !silent) {
 			stream.write("Things, Mysterious THINGS.\r");
 		} else if (cmd[1] == "thank" && !silent) {
-			stream.write("Everybody thanks " + (cmd[2] || "Shazow") + " for their excellent work!\r");
+			cmd.shift();
+			cmd.shift();
+			stream.write("Everybody thanks " + (cmd.join(" ") || "Shazow") + " for their excellent work!\r");
 		} else if (cmd[1] == "list") {
 			if (!currentWhois) {
 				currentWhois = "list";
@@ -219,9 +221,9 @@ function commands(msg, nick, stream) {
 			} else {
 				stream.write("Busy, please wait.\r");
 			}
-		} else if (cmd[1] == "halt") {
+		} else if (cmd[1] == "restart") {
 			if (!currentWhois) {
-				currentWhois = "halt";
+				currentWhois = "restart";
 				stream.write("/whois " + nick + "\r");
 			} else {
 				stream.write("Busy, please wait.\r");
@@ -241,7 +243,7 @@ function finishWhois(string, nick, stream) {
 		} else {
 			stream.write("Hello, " + string + "\r");
 		}
-	} else if (currentWhois == "halt") {
+	} else if (currentWhois == "restart") {
 		if (db[string] && db[string][1]) {
 			process.exit(0);
 		} else {
@@ -267,7 +269,7 @@ function finishWhois(string, nick, stream) {
 			for (var i in joined) {
 				unique++;
 			}
-			stream.write("Welcome " + nick + " to chat.shazow.net! " + unique + " unique people have been here!\r");
+			stream.write("Welcome " + nick + " to chat.shazow.net! I've seen " + unique + " unique people here so far!\r");
 			require("fs").writeFileSync(dataJSON, JSON.stringify(joined));
 		}
 	} else if (currentWhois == "opme") {
