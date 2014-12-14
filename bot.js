@@ -80,8 +80,12 @@ conn.on("ready", function() {
 					logChat("join", resp[2], resp[2] + " joined.");
 				}
 
+				// Identify leave
+				if (resp[1] == "*" && resp[3] == "left.") {
+					logChat("leave", resp[2], resp[2] + " left.");
+				}
+
 				// Identify list response
-				resp = data.split(" ");
 				if (resp[0] == "->" && resp[2] == "connected:") {
 					var list = data.split(":");
 					list = list[1].substring(1, list[1].length);
@@ -90,19 +94,17 @@ conn.on("ready", function() {
 				}
 
 				// Identify WHOIS response
-				resp = data.split(" ");
 				if (resp[0] == "->" && resp[4] == "via") {
 					finishWhois(resp[3], resp[1], stream);
 				}
 
 				// Identify failed WHOIS response
-				resp = data.split(" ");
 				if (resp[0] == "->" && resp[2] == "such" && resp[3] == "name:") {
 					currentWhois = null;
 				}
 
 				// Identify speaking for chat
-				nick = data.split(":")[0];
+				var nick = data.split(":")[0];
 				if (nick.indexOf(" ") == -1) {
 
 					if (users[nick]) {
@@ -125,7 +127,7 @@ conn.on("ready", function() {
 				}
 
 				// Identify speaking for /me
-				var nick = data.split(" ");
+				nick = data.split(" ");
 				if (nick[0] == "**") {
 					nick = nick[1];
 
@@ -147,7 +149,6 @@ conn.on("ready", function() {
 				}
 
 				// Nick change anti-spam
-				nick = data.split(" ");
 				if (nick[2] == "is" && nick[4] == "known") {
 					var newnick = nick[6].substring(0, nick[6].length - 1);
 					nick = nick[1];
