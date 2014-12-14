@@ -310,7 +310,7 @@ function commands(msg, nick, stream) {
 			stream.write("Unknown command.\r");
 		}
 	} else {
-		trivia(nick, cmd[0], stream, true);
+		trivia(nick, cmd, stream, true);
 	}
 }
 
