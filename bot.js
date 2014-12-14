@@ -405,7 +405,21 @@ http.createServer(function (req, res) {
 		res.end(fs.readFileSync(logJSON));
 	} else if (path == "/humans") {
 		var log = fs.readFileSync(logJSON);
-		res.end("Test\nTest");
+		var humans = "";
+		log.forEach(function(v) {
+			if (v.type == "message") {
+				log += v.user + ": " + v.message;
+			} else if (v.type == "action") {
+				log += " ** " + v.user + " " + v.message;
+			} else if (v.type == "join") {
+				log += " * " + v.user + " joined.";
+			} else if (v.type == "leave") {
+				log += " * " + v.user + " left.";
+			} else if (v.type == "nickchange") {
+				log += " * " + v.message;
+			}
+		})
+		res.end(humans);
 	} else {
 		res.end("Unknown Path");
 	}
