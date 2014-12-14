@@ -404,7 +404,7 @@ http.createServer(function (req, res) {
 	} else if (path == "/json") {
 		res.end(fs.readFileSync(logJSON));
 	} else if (path == "/humans") {
-		var log = fs.readFileSync(logJSON);
+		var log = JSON.parse(fs.readFileSync(logJSON));
 		var humans = "";
 		log.forEach(function(v) {
 			if (v.type == "message") {
