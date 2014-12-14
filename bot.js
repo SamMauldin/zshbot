@@ -47,7 +47,7 @@ conn.on("ready", function() {
 		stream.on("data", function(data) {
 			data = data + "";
 			data = data.substring(0, data.length - 2);
-			
+
 			var splitdata = data.split("\u001b[");
 			var newdata = [];
 			splitdata.forEach(function(v, k) {
@@ -62,15 +62,15 @@ conn.on("ready", function() {
 			data = newdata.join("");
 
 			if (data != "[" + ourNick && data != "\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b" && data != "") {
-				
+
 				console.log("Data: " + data + ";");
-				
+
 				// Identify join
 				var resp = data.split(" ");
 				if (resp[1] == "*" && resp[3] == "joined.") {
 					onJoin(resp[2], stream);
 				}
-				
+
 				// Identify list response
 				var resp = data.split(" ");
 				if (resp[0] == "->" && resp[2] == "connected:") {
@@ -79,19 +79,19 @@ conn.on("ready", function() {
 					list = list.split(", ");
 					finishList(list, stream);
 				}
-				
+
 				// Identify WHOIS response
 				var resp = data.split(" ");
 				if (resp[0] == "->" && resp[4] == "via") {
 					finishWhois(resp[3], resp[1], stream);
 				}
-				
+
 				// Identify failed WHOIS response
 				var resp = data.split(" ");
 				if (resp[0] == "->" && resp[2] == "such" && resp[3] == "name:") {
 					currentWhois = null;
 				}
-				
+
 				// Identify speaking for chat
 				var nick = data.split(":")[0];
 				if (nick.indexOf(" ") == -1) {
@@ -105,12 +105,12 @@ conn.on("ready", function() {
 					} else {
 						users[nick] = 1;
 					}
-					
+
 					var msg = data.split(":");
 					msg.shift();
 					msg = msg.join(":");
 					msg = msg.substring(1, msg.length);
-					
+
 					commands(msg, nick, stream);
 				}
 
@@ -206,7 +206,7 @@ function commands(msg, nick, stream) {
 	if (!run) { return; }
 	console.log(nick + "(" + users[nick] + "): " + msg);
 	if (msg == "exit") {
-		stream.write("Type /exit to exit.\r");
+		stream.write("/msg " + nick + " Type /exit to exit.\r");
 	}
 	var cmd = msg.split(" ");
 	if (cmd[0] == ourNick + ",") {
