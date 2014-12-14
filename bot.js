@@ -208,7 +208,11 @@ var triviaQuestions = [
 	["What number equates to false?", "0"],
 	["What number equates to true?", "1"],
 	["What old, but still popular, chat service does ssh-chat aspire to be like?", "irc"],
-	["In unix, the modern vi replacement is called what?", "vim"]
+	["In unix, the modern vi replacement is called what?", "vim"],
+	["What is the IP of Google's public DNS?", "8.8.8.8"],
+	["Where are most things made?", "china"],
+	["What popular hash algorithm is old and broken?", "md5"],
+	["What spy orginization watches the internet?", "nsa"]
 ];
 
 var triviaQ = null;
