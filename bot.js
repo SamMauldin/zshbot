@@ -107,7 +107,7 @@ conn.on("ready", function() {
 
 				// Identify speaking for chat
 				var nick = data.split(":")[0];
-				if (nick.indexOf(" ") == -1) {
+				if (nick.indexOf(" ") == -1 && nick != "/list") {
 
 					if (users[nick]) {
 						users[nick] ++;
