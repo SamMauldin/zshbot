@@ -11,6 +11,8 @@ var sshKey = "/home/ubuntu/.ssh/sshbot"; // SSH Private key for bot.
 
 var chatServer = "chat.shazow.net"; // Chat server for bot
 
+var logPort = 8080; // What port to host the log HTTP server on
+
 var limit = 5; // How many chat messages can be sent per user per five seconds before silence
 
 var nicklimit = 3; // How many times a user can change their nick in ten seconds before ban
@@ -391,9 +393,17 @@ function onJoin(nick, stream) {
 }
 
 var http = require("http");
+var url = require("url");
 var fs = require("fs");
 
 http.createServer(function (req, res) {
 	res.writeHead(200, {"Content-Type": "text/plain"});
-	res.end(fs.readFileSync(logJSON));
-}).listen(8080);
+	var path = url.parse(req.url).pathname;
+	if (path == "/") {
+		res.end("Welcome, human readable log in progress, API at /json");
+	} else if (path == "/json") {
+		res.end(fs.readFileSync(logJSON));
+	} else {
+		res.end("Unknown Path");
+	}
+}).listen(logPort);
