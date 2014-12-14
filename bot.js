@@ -149,9 +149,9 @@ conn.on("ready", function() {
 				}
 
 				// Nick change anti-spam
-				if (nick[2] == "is" && nick[4] == "known") {
-					var newnick = nick[6].substring(0, nick[6].length - 1);
-					nick = nick[1];
+				if (nick[3] == "is" && nick[5] == "known") {
+					var newnick = nick[7].substring(0, nick[7].length - 1);
+					nick = nick[2];
 
 					logChat("nickchange", newnick, nick + " is now known as " + newnick);
 
