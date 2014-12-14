@@ -408,17 +408,17 @@ http.createServer(function (req, res) {
 		var humans = "";
 		log.forEach(function(v) {
 			if (v.type == "message") {
-				log += v.user + ": " + v.message;
+				humans += v.user + ": " + v.message + "\n";
 			} else if (v.type == "action") {
-				log += " ** " + v.user + " " + v.message;
+				humans += " ** " + v.user + " " + v.message + "\n";
 			} else if (v.type == "join") {
-				log += " * " + v.user + " joined.";
+				humans += " * " + v.user + " joined.\n";
 			} else if (v.type == "leave") {
-				log += " * " + v.user + " left.";
+				humans += " * " + v.user + " left.\n";
 			} else if (v.type == "nickchange") {
-				log += " * " + v.message;
+				humans += " * " + v.message + "\n";
 			}
-		})
+		});
 		res.end(humans);
 	} else {
 		res.end("Unknown Path");
