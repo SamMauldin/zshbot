@@ -257,7 +257,7 @@ function commands(msg, nick, stream) {
 		stream.write("/msg " + nick + " Type /exit to exit.\r");
 	}
 	var cmd = msg.split(" ");
-	if (cmd[0] == ourNick + ":") {
+	if (cmd[0] == ourNick + ":" || cmd[0] == ourNick + "," || cmd[0] == ourNick) {
 		if ((cmd[1] == "identify" || cmd[1] == "whoami") && !silent) {
 			if (currentWhois) {
 				stream.write("Busy, please wait.\r");
