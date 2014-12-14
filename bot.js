@@ -408,18 +408,18 @@ http.createServer(function (req, res) {
 		var humans = "";
 		log.forEach(function(v) {
 			if (v.type == "message") {
-				humans += v.user + ": " + v.message + "\n";
+				humans = v.user + ": " + v.message + "\n" + humans;
 			} else if (v.type == "action") {
-				humans += " ** " + v.user + " " + v.message + "\n";
+				humans = " ** " + v.user + " " + v.message + "\n" + humans;
 			} else if (v.type == "join") {
-				humans += " * " + v.user + " joined.\n";
+				humans = " * " + v.user + " joined.\n" + humans;
 			} else if (v.type == "leave") {
-				humans += " * " + v.user + " left.\n";
+				humans = " * " + v.user + " left.\n" + humans;
 			} else if (v.type == "nickchange") {
-				humans += " * " + v.message + "\n";
+				humans = " * " + v.message + "\n" + humans;
 			}
 		});
-		res.end(humans);
+		res.end("Latest messages shown at top.\n\n" + humans);
 	} else {
 		res.end("Unknown Path");
 	}
