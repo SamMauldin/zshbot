@@ -3,9 +3,9 @@
 
 var ourNick = "zsh"; // Nickname for bot
 
-var dataJSON = "/Users/Sam/Documents/zshbot/joined.json"; // Data storage file
+var dataJSON = "/home/ubuntu/zshbot/joined.json"; // Data storage file
 
-var sshKey = "/Users/Sam/.ssh/sshbot"; // SSH Private key for bot.
+var sshKey = "/home/ubuntu/.ssh/sshbot"; // SSH Private key for bot.
 
 var chatServer = "chat.shazow.net"; // Chat server for bot
 
