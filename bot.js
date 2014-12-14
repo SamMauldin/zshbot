@@ -262,19 +262,19 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "log" && !silent) {
 			stream.write("The log can be found at: " + logURL + "\r");
 		} else if (cmd[1] == "ls" && !silent) {
-			stream.write("Bus Error\r");
+			stream.write("File system corrupted.\r");
 		} else if (cmd[1] == "sudo" && !silent) {
-			stream.write("Password:\r");
+			stream.write("No.\r");
 		} else if (cmd[1] == "update" && !silent) {
 			stream.write("Upgrading oh-my-zsh... Done!\r");
 		} else if (cmd[1] == "ssh" && !silent) {
 			stream.write("Connecting... Joined chat!\r");
 		} else if (cmd[1] == "beepme" && !silent) {
-			stream.write("Beeping " + nick + "...\r");
+			stream.write("Beeping " + nick + ". Use the /beep command to enable beeps.\r");
 		} else if (cmd[1] == "zsh" && !silent) {
 			stream.write("ZSHCEPTION!\r");
 		} else if (cmd[1] == "cat" && !silent) {
-			stream.write("Things, Mysterious THINGS.\r");
+			stream.write("File not found.\r");
 		} else if (cmd[1] == "thank" && !silent) {
 			cmd.shift();
 			cmd.shift();
