@@ -51,7 +51,7 @@ conn.on("ready", function() {
 			var splitdata = data.split("\u001b[");
 			var newdata = [];
 			splitdata.forEach(function(v, k) {
-				if (k == 0) {
+				if (k === 0) {
 					newdata.push(v);
 				} else {
 					var newsection = v.split("m");
@@ -61,7 +61,7 @@ conn.on("ready", function() {
 			});
 			data = newdata.join("");
 
-			if (data != "[" + ourNick && data != "\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b" && data != "") {
+			if (data != "[" + ourNick && data != "\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b" && data !== "") {
 
 				console.log("Data: " + data + ";");
 
@@ -72,7 +72,7 @@ conn.on("ready", function() {
 				}
 
 				// Identify list response
-				var resp = data.split(" ");
+				resp = data.split(" ");
 				if (resp[0] == "->" && resp[2] == "connected:") {
 					var list = data.split(":");
 					list = list[1].substring(1, list[1].length);
@@ -81,19 +81,19 @@ conn.on("ready", function() {
 				}
 
 				// Identify WHOIS response
-				var resp = data.split(" ");
+				resp = data.split(" ");
 				if (resp[0] == "->" && resp[4] == "via") {
 					finishWhois(resp[3], resp[1], stream);
 				}
 
 				// Identify failed WHOIS response
-				var resp = data.split(" ");
+				resp = data.split(" ");
 				if (resp[0] == "->" && resp[2] == "such" && resp[3] == "name:") {
 					currentWhois = null;
 				}
 
 				// Identify speaking for chat
-				var nick = data.split(":")[0];
+				nick = data.split(":")[0];
 				if (nick.indexOf(" ") == -1) {
 
 					if (users[nick]) {
@@ -132,10 +132,10 @@ conn.on("ready", function() {
 				}
 
 				// Nick change anti-spam
-				var nick = data.split(" ");
+				nick = data.split(" ");
 				if (nick[2] == "is" && nick[4] == "known") {
 					var newnick = nick[6].substring(0, nick[6].length - 1);
-					var nick = nick[1];
+					nick = nick[1];
 
 					if (nickchange[nick]) {
 						nickchange[newnick] = nickchange[nick] + 1;
@@ -157,7 +157,7 @@ conn.on("ready", function() {
 
 		});
 	});
-})
+});
 
 conn.connect({
 	host: chatServer,
