@@ -192,19 +192,19 @@ var silent = false;
 
 var triviaQuestions = [
 	["What year was chat.shazow.net made in?", "2014"],
-	["What language is this server made in", "go"],
-	["What language am I, zsh, written in", "node.js"],
+	["What language is this server made in", "go", "golang"],
+	["What language am I, zsh, written in", "node", "node.js"],
 	["What port does SSH run on?", "22"],
-	["What service runs on port 443?", "https"],
+	["What service runs on port 443?", "https", "ssl"],
 	["What is the first prime number above 1000?", "1009"],
 	["How many bits are in a byte?", "8"],
 	["What's the name for Mac OS 10.10", "yosemite"],
 	["What is the answer to life the universe and everything?", "42"],
 	["How many colors are possible for nicknames in ssh-chat?", "256"],
 	["What is the main branch of a git repository?", "master"],
-	["How many mainstream versions of python are there?", "2"],
-	["What company makes golang?", "google"],
-	["Does lua have a math.round operation?", "no"],
+	["How many mainstream versions of python are there?", "2", "two"],
+	["What company makes golang?", "google", "google.com"],
+	["Does lua have a math.round operation?", "no", "false"],
 	["What number equates to false?", "0"],
 	["What number equates to true?", "1"],
 	["What old, but still popular, chat service does ssh-chat aspire to be like?", "irc"],
@@ -221,7 +221,7 @@ function trivia(nick, cmd, stream, answer) {
 	if (triviaQ !== null) {
 		if (cmd[0]) {
 			cmd[0] = cmd[0].toLowerCase();
-			if (cmd[0] == triviaQuestions[triviaQ][1]) {
+			if (cmd[0] == triviaQuestions[triviaQ][1] || (triviaQuestions[triviaQ][2] && cmd[0] == triviaQuestions[triviaQ][2])) {
 				stream.write("Correct answer! " + nick + " wins!\r");
 				triviaQ = null;
 			} else if (!answer) {
