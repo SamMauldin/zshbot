@@ -13,6 +13,8 @@ var chatServer = "chat.shazow.net"; // Chat server for bot
 
 var logPort = 8080; // What port to host the log HTTP server on
 
+var logURL = "http://node.fluidnode.com:8080/"; // URL of the log server
+
 var limit = 5; // How many chat messages can be sent per user per five seconds before silence
 
 var nicklimit = 3; // How many times a user can change their nick in ten seconds before ban
@@ -252,10 +254,12 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "easter" && !silent) {
 			stream.write("You found an easter egg!\r");
 		} else if (cmd[1] == "help" && !silent) {
-			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, trivia, restart, identify, silence, list, beepme. Made by Sam. https://github.com/Sxw1212/zshbot\r");
+			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, log, cat, update, opme, trivia, restart, identify, silence, list, beepme. Made by Sam. https://github.com/Sxw1212/zshbot\r");
 		} else if (cmd[1] == "trivia" && !silent) {
 			cmd.shift(); cmd.shift();
 			trivia(nick, cmd, stream);
+		} else if (cmd[1] == "log" && !silent) {
+			stream.write("The log can be found at: " + logURL + "\r");
 		} else if (cmd[1] == "ls" && !silent) {
 			stream.write("Bus Error\r");
 		} else if (cmd[1] == "sudo" && !silent) {
