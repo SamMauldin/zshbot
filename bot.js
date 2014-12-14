@@ -168,6 +168,40 @@ conn.connect({
 
 var silent = false;
 
+var triviaQuestions = [
+	["What year was chat.shazow.net made in?", "2014"],
+	["What is the name of my, zsh's, creator?", "sam"],
+	["What language is this server made in", "go"],
+	["What language am I, zsh, written in", "node.js"],
+	["What port does SSH run on?", "22"],
+	["What service runs on port 443?", "https"],
+	["What is the first prime number above 1000?", "1009"],
+	["How many bits are in a byte?", "8"],
+	["What's the name for Mac OS 10.10", "yosemite"]
+];
+
+var triviaQ = null;
+
+function trivia(nick, cmd, stream) {
+	if (triviaQ !== null) {
+		if (cmd[0]) {
+			cmd[0] = cmd[0].toLowerCase();
+			if (cmd[0] == triviaQuestions[triviaQ][1]) {
+				stream.write("Correct answer! " + nick + " wins!\r");
+				triviaQ = null;
+			} else {
+				stream.write("Incorrect answer\r");
+			}
+		} else {
+			stream.write(triviaQuestions[triviaQ][0] + "\r");
+		}
+	} else {
+		var q = Math.floor(Math.random() * triviaQuestions.length);
+		stream.write("New question: " + triviaQuestions[q][0] + "\r");
+		triviaQ = q;
+	}
+}
+
 function commands(msg, nick, stream) {
 	if (!run) { return; }
 	console.log(nick + "(" + users[nick] + "): " + msg);
@@ -186,7 +220,10 @@ function commands(msg, nick, stream) {
 		} else if (cmd[1] == "easter" && !silent) {
 			stream.write("You found an easter egg!\r");
 		} else if (cmd[1] == "help" && !silent) {
-			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, restart, identify, silence, list, beepme. Made by Sam. https://github.com/Sxw1212/zshbot\r");
+			stream.write("ZSH command list: ls, sudo, thank, ssh, zsh, cat, update, opme, trivia, restart, identify, silence, list, beepme. Made by Sam. https://github.com/Sxw1212/zshbot\r");
+		} else if (cmd[1] == "trivia" && !silent) {
+			cmd.shift(); cmd.shift();
+			trivia(nick, cmd, stream);
 		} else if (cmd[1] == "ls" && !silent) {
 			stream.write("Bus Error\r");
 		} else if (cmd[1] == "sudo" && !silent) {
@@ -274,7 +311,6 @@ function finishWhois(string, nick, stream) {
 			for (var i in joined) {
 				unique++;
 			}
-			stream.write("Welcome " + nick + " to chat.shazow.net! I've seen " + unique + " unique people here so far!\r");
 			require("fs").writeFileSync(dataJSON, JSON.stringify(joined));
 		}
 	} else if (currentWhois == "opme") {
