@@ -2,6 +2,7 @@
 
 while true; do
 git pull
-node bot.js
+npm install
+nodejs bot.js
 sleep 5
 done
