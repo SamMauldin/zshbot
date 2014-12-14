@@ -5,6 +5,8 @@ var ourNick = "zsh"; // Nickname for bot
 
 var dataJSON = "/home/ubuntu/zshbot/joined.json"; // Data storage file
 
+var logJSON = "/home/ubuntu/zshbot/log.json"; // Data storage file
+
 var sshKey = "/home/ubuntu/.ssh/sshbot"; // SSH Private key for bot.
 
 var chatServer = "chat.shazow.net"; // Chat server for bot
@@ -50,6 +52,7 @@ conn.on("ready", function() {
 		});
 
 		stream.on("data", function(data) {
+			if (!run) { return; }
 			data = data + "";
 			data = data.substring(0, data.length - 2);
 
@@ -74,6 +77,7 @@ conn.on("ready", function() {
 				var resp = data.split(" ");
 				if (resp[1] == "*" && resp[3] == "joined.") {
 					onJoin(resp[2], stream);
+					logChat("join", resp[2], resp[2] + " joined.");
 				}
 
 				// Identify list response
@@ -117,6 +121,7 @@ conn.on("ready", function() {
 					msg = msg.substring(1, msg.length);
 
 					commands(msg, nick, stream);
+					logChat("message", nick, msg);
 				}
 
 				// Identify speaking for /me
@@ -124,9 +129,14 @@ conn.on("ready", function() {
 				if (nick[0] == "**") {
 					nick = nick[1];
 
+					var action = data.split(" ");
+					action.shift(); action.shift();
+					action = action.join(" ");
+
+					logChat("action", nick, action);
+
 					if (users[nick]) {
 						users[nick] ++;
-						console.log(nick + ":" + users[nick]);
 						if (users[nick] == limit + 1) {
 							stream.write("/silence " + nick + " 1m\r");
 							stream.write("Dear " + nick + ", please shut up. \r");
@@ -141,6 +151,8 @@ conn.on("ready", function() {
 				if (nick[2] == "is" && nick[4] == "known") {
 					var newnick = nick[6].substring(0, nick[6].length - 1);
 					nick = nick[1];
+
+					logChat("nickchange", newnick, nick + " is now known as " + newnick);
 
 					if (nickchange[nick]) {
 						nickchange[newnick] = nickchange[nick] + 1;
@@ -206,8 +218,21 @@ function trivia(nick, cmd, stream) {
 	}
 }
 
+var log = require(logJSON);
+
+function logChat(type, nick, msg) {
+	var logItem = {
+		type: type,
+		user: nick,
+		message: msg,
+		isotimestamp: new Date().toISOString(),
+		unixtimestamp: new Date().getTime()
+	};
+	log.push(logItem);
+	require("fs").writeFileSync(logJSON, JSON.stringify(log));
+}
+
 function commands(msg, nick, stream) {
-	if (!run) { return; }
 	console.log(nick + "(" + users[nick] + "): " + msg);
 	if (msg == "exit") {
 		stream.write("/msg " + nick + " Type /exit to exit.\r");
