@@ -198,7 +198,8 @@ var triviaQuestions = [
 	["What service runs on port 443?", "https"],
 	["What is the first prime number above 1000?", "1009"],
 	["How many bits are in a byte?", "8"],
-	["What's the name for Mac OS 10.10", "yosemite"]
+	["What's the name for Mac OS 10.10", "yosemite"],
+	["What is the answer to life the universe and everything?", "42"]
 ];
 
 var triviaQ = null;
