@@ -400,9 +400,12 @@ http.createServer(function (req, res) {
 	res.writeHead(200, {"Content-Type": "text/plain"});
 	var path = url.parse(req.url).pathname;
 	if (path == "/") {
-		res.end("Welcome, human readable log in progress, API at /json");
+		res.end("Welcome, human readable log at /humans, API at /json");
 	} else if (path == "/json") {
 		res.end(fs.readFileSync(logJSON));
+	} else if (path == "/humans") {
+		var log = fs.readFileSync(logJSON);
+		res.end("Test\nTest");
 	} else {
 		res.end("Unknown Path");
 	}
