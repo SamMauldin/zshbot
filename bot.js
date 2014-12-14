@@ -203,20 +203,20 @@ var triviaQuestions = [
 
 var triviaQ = null;
 
-function trivia(nick, cmd, stream) {
+function trivia(nick, cmd, stream, answer) {
 	if (triviaQ !== null) {
 		if (cmd[0]) {
 			cmd[0] = cmd[0].toLowerCase();
 			if (cmd[0] == triviaQuestions[triviaQ][1]) {
 				stream.write("Correct answer! " + nick + " wins!\r");
 				triviaQ = null;
-			} else {
+			} else if (!answer) {
 				stream.write("Incorrect answer\r");
 			}
 		} else {
 			stream.write(triviaQuestions[triviaQ][0] + "\r");
 		}
-	} else {
+	} else if (!answer) {
 		var q = Math.floor(Math.random() * triviaQuestions.length);
 		stream.write("New question: " + triviaQuestions[q][0] + "\r");
 		triviaQ = q;
@@ -309,6 +309,8 @@ function commands(msg, nick, stream) {
 		} else if (!silent) {
 			stream.write("Unknown command.\r");
 		}
+	} else {
+		trivia(nick, cmd[0], stream, true);
 	}
 }
 
