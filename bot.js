@@ -44,6 +44,11 @@ conn.on("ready", function() {
 	console.log("Connected");
 	conn.shell(function(err, stream) {
 		if (err) throw err;
+
+		stream.on("end", function() {
+				process.exit(0);
+		});
+
 		stream.on("data", function(data) {
 			data = data + "";
 			data = data.substring(0, data.length - 2);
@@ -170,7 +175,6 @@ var silent = false;
 
 var triviaQuestions = [
 	["What year was chat.shazow.net made in?", "2014"],
-	["What is the name of my, zsh's, creator?", "sam"],
 	["What language is this server made in", "go"],
 	["What language am I, zsh, written in", "node.js"],
 	["What port does SSH run on?", "22"],
