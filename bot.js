@@ -199,7 +199,16 @@ var triviaQuestions = [
 	["What is the first prime number above 1000?", "1009"],
 	["How many bits are in a byte?", "8"],
 	["What's the name for Mac OS 10.10", "yosemite"],
-	["What is the answer to life the universe and everything?", "42"]
+	["What is the answer to life the universe and everything?", "42"],
+	["How many colors are possible for nicknames in ssh-chat?", "256"],
+	["What is the main branch of a git repository?", "master"],
+	["How many mainstream versions of python are there?", "2"],
+	["What company makes golang?", "google"],
+	["Does lua have a math.round operation?", "no"],
+	["What number equates to false?", "0"],
+	["What number equates to true?", "1"],
+	["What old, but still popular, chat service does ssh-chat aspire to be like?", "irc"],
+	["In unix, the modern vi replacement is called what?", "vim"]
 ];
 
 var triviaQ = null;
