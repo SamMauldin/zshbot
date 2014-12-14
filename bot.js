@@ -389,3 +389,11 @@ function onJoin(nick, stream) {
 		console.log("Join whois aborted, busy: " + currentWhois);
 	}
 }
+
+var http = require("http");
+var fs = require("fs");
+
+http.createServer(function (req, res) {
+	res.writeHead(200, {"Content-Type": "text/plain"});
+	res.end(fs.readFileSync(logJSON));
+}).listen(8080);
