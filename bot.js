@@ -19,6 +19,8 @@ var limit = 5; // How many chat messages can be sent per user per five seconds b
 
 var nicklimit = 3; // How many times a user can change their nick in ten seconds before ban
 
+var exitMessage = false; // Should I tell people to use /exit when they say "exit"?
+
 var db = {}; // Ignore me
 
 // Format: db["fingerprint"] = ["Nickname", isOP];
@@ -253,7 +255,7 @@ function logChat(type, nick, msg) {
 
 function commands(msg, nick, stream) {
 	console.log(nick + "(" + users[nick] + "): " + msg);
-	if (msg == "exit") {
+	if (msg == "exit" && exitMessage) {
 		stream.write("/msg " + nick + " Type /exit to exit.\r");
 	}
 	var cmd = msg.split(" ");
