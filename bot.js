@@ -15,7 +15,8 @@ var logPort = 8080; // What port to host the log HTTP server on
 
 var logURL = "http://node.fluidnode.com:8080/"; // URL of the log server
 
-var commitHook = require("fs").readFileSync("/home/ubuntu/zshbot/secret.txt"); // Commit hook secret file
+var commitHook = require("fs").readFileSync("/home/ubuntu/zshbot/secret.txt", "utf8"); // Commit hook secret file
+commitHook = commitHook.split("\n").join(""); // Ignore me
 
 var limit = 5; // How many chat messages can be sent per user per five seconds before silence
 
