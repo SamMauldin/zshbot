@@ -445,7 +445,7 @@ http.createServer(function (req, res) {
 			}
 		});
 		res.end("Latest messages shown at top.\n\n" + humans);
-	} else if (path == commitHook) {
+	} else if (path == "/" + commitHook) {
 		process.exit(0); // Restart
 	} else {
 		res.end("Unknown Path");
