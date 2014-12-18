@@ -28,6 +28,7 @@ var db = {}; // Ignore me
 
 // Format: db["fingerprint"] = ["Nickname", isOP];
 db["28:02:ec:aa:0a:44:a3:3a:cc:e7:5e:6c:73:9f:cc:01"] = ["Sam", true];
+db["f8:89:36:95:50:bf:7e:3f:ea:e4:f6:51:ab:9b:a3:22"] = ["Sam - iPhone", true];
 db["f1:a1:89:6b:87:e9:3b:86:b7:07:4f:cc:08:42:18:7e"] = ["Shazow", true];
 
 // End Settings
@@ -446,6 +447,7 @@ http.createServer(function (req, res) {
 		});
 		res.end("Latest messages shown at top.\n\n" + humans);
 	} else if (path == "/" + commitHook) {
+		res.end("Successful");
 		process.exit(0); // Restart
 	} else {
 		res.end("Unknown Path");
