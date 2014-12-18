@@ -15,6 +15,8 @@ var logPort = 8080; // What port to host the log HTTP server on
 
 var logURL = "http://node.fluidnode.com:8080/"; // URL of the log server
 
+var commitHook = require("fs").readFileSync("/home/ubuntu/zshbot/secret.txt"); // Commit hook secret file
+
 var limit = 5; // How many chat messages can be sent per user per five seconds before silence
 
 var nicklimit = 3; // How many times a user can change their nick in ten seconds before ban
@@ -442,6 +444,8 @@ http.createServer(function (req, res) {
 			}
 		});
 		res.end("Latest messages shown at top.\n\n" + humans);
+	} else if (path == commitHook) {
+		process.exit(0); // Restart
 	} else {
 		res.end("Unknown Path");
 	}
