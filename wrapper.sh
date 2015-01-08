@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /home/ubuntu/zshbot;
+
 while true; do
 git pull
 npm install

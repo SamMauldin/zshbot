@@ -299,12 +299,13 @@ function commands(msg, nick, stream) {
 			cmd.shift();
 			stream.write("Everybody thanks " + (cmd.join(" ") || "Shazow") + " for their excellent work!\r");
 		} else if (cmd[1] == "list") {
-			if (!currentWhois) {
-				currentWhois = "list";
-				stream.write("/whois " + nick + "\r");
-			} else {
-				stream.write("Busy, please wait.\r");
-			}
+			//if (!currentWhois) {
+			//	currentWhois = "list";
+			//	stream.write("/whois " + nick + "\r");
+			//} else {
+			//	stream.write("Busy, please wait.\r");
+			//}
+			stream.write("List currently disabled due to /list format changes");
 		} else if (cmd[1] == "opme") {
 			if (!currentWhois) {
 				currentWhois = "opme";
