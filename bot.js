@@ -218,7 +218,7 @@ var triviaQuestions = [
 	["What is the IP of Google's public DNS?", "8.8.8.8"],
 	["Where are most things made?", "china"],
 	["What popular hash algorithm is old and broken?", "md5"],
-	["What spy orginization watches the internet?", "nsa"]
+	["What spy organization watches the internet?", "nsa"]
 ];
 
 var triviaQ = null;
