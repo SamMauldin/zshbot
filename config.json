@@ -16,6 +16,7 @@
     "commands": {
         "help": true,
         "cat": true,
-        "identify": true
+        "identify": true,
+        "admin": true
     }
 }
