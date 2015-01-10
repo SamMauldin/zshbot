@@ -3,11 +3,13 @@
     "server": "chat.shazow.net",
     "privateKey": "/home/ubuntu/.ssh/sshbot",
     "data": "/home/ubuntu/zshbot/data.json",
+    "webserver" : {
+        "port": 8080
+    },
     "log": {
         "enable": true,
         "file": "/home/ubuntu/zshbot/log.json",
-        "url": "http://node.fluidnode.com:8080/",
-        "port": 8080
+        "url": "http://node.fluidnode.com:8080/"
     },
     "githubCommit": {
         "enable": true,
@@ -18,7 +20,8 @@
         "cat": true,
         "identify": true,
         "admin": true,
-        "log": true
+        "log": true,
+        "nickman": true
     },
-    "features": ["opme"]
+    "features": ["opme", "nickman"]
 }
