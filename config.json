@@ -1,0 +1,19 @@
+{
+    "name": "zsh",
+    "server": "chat.shazow.net",
+    "privateKey": "/home/ubuntu/.ssh/sshbot",
+    "data": "/home/ubuntu/zshbot/data.json",
+    "log": {
+        "enable": true,
+        "file": "/home/ubuntu/zshbot/log.json",
+        "url": "http://node.fluidnode.com:8080/",
+        "port": 8080
+    },
+    "githubCommit": {
+        "enable": true,
+        "hook": "/home/ubuntu/zshbot/secret.txt"
+    },
+    "commands": {
+        "help": true
+    }
+}
