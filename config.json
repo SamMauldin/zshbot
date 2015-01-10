@@ -15,6 +15,7 @@
     },
     "commands": {
         "help": true,
-        "cat": true
+        "cat": true,
+        "identify": true
     }
 }
