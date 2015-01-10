@@ -17,7 +17,8 @@
         "help": true,
         "cat": true,
         "identify": true,
-        "admin": true
+        "admin": true,
+        "log": true
     },
     "features": ["opme"]
 }
