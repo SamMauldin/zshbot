@@ -18,5 +18,6 @@
         "cat": true,
         "identify": true,
         "admin": true
-    }
+    },
+    "features": ["opme"]
 }

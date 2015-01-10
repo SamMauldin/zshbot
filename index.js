@@ -5,3 +5,7 @@ var config = require("./config.json");
 require("./lib/chat");
 require("./lib/bot");
 require("./lib/webserver");
+
+config.features.forEach(function(v) {
+    require("./lib/handlers/" + v);
+});
