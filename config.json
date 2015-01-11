@@ -23,7 +23,8 @@
         "log": true,
         "nickman": true,
         "mail": true,
-        "eval": false
+        "eval": false,
+        "list": true
     },
     "features": ["opme", "nickman", "mail"]
 }
