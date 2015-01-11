@@ -1,6 +1,6 @@
 {
 	"name": "zshbot",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"dependencies": {
 		"ssh2": "*",
 		"node-uuid": "*"

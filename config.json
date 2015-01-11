@@ -22,7 +22,8 @@
         "admin": true,
         "log": true,
         "nickman": true,
-        "mail": true
+        "mail": true,
+        "eval": false
     },
     "features": ["opme", "nickman", "mail"]
 }
