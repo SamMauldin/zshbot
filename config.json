@@ -21,7 +21,8 @@
         "identify": true,
         "admin": true,
         "log": true,
-        "nickman": true
+        "nickman": true,
+        "mail": true
     },
-    "features": ["opme", "nickman"]
+    "features": ["opme", "nickman", "mail"]
 }
