@@ -17,14 +17,15 @@
     },
     "commands": {
         "help": true,
-        "cat": true,
-        "identify": true,
-        "admin": true,
+        "about": true,
+        "list": true,
         "log": true,
-        "nickman": true,
         "mail": true,
-        "eval": false,
-        "list": true
+        "identify": true,
+        "cat": true,
+        "admin": true,
+        "nickman": true,
+        "eval": false
     },
     "features": ["opme", "nickman", "mail"]
 }
