@@ -4,12 +4,12 @@
     "privateKey": "/home/ubuntu/.ssh/sshbot",
     "data": "/home/ubuntu/zshbot/data.json",
     "webserver" : {
-        "port": 8080
+        "port": 8009
     },
     "log": {
         "enable": true,
         "file": "/home/ubuntu/zshbot/log.json",
-        "url": "http://node.fluidnode.com:8080/"
+        "url": "http://zshbot.fluidnode.com/"
     },
     "githubCommit": {
         "enable": true,
